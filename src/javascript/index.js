@@ -25,3 +25,24 @@ const getCurrentData = async function getLocationWeatherData(location) {
 
 	return { address, temperature, condition, highTemp, lowTemp, forecast };
 };
+
+const getForecastData = async function getWeatherForecast(location) {
+	const forecastInfo = (await getCurrentData(location)).forecast;
+
+	let forecast = [];
+
+	for (let day = 0; day < 7; day++) {
+		let currentDay = forecastInfo[day];
+
+		let dayInfo = {
+			date: currentDay.datetime,
+			highTemp: currentDay.tempmax,
+			lowTemp: currentDay.tempmin,
+			condition: currentDay.conditions,
+		};
+
+		forecast.push(dayInfo);
+	}
+
+	return { forecast };
+};
