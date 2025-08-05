@@ -1,8 +1,8 @@
 import { CurrentWeather, Location } from './classes';
 
-const getWeatherFrom = async function getLocationWeather(location) {
+const getWeatherFrom = async function getLocationWeather(location, unit) {
 	const promise = await fetch(
-		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=BJAE6JWBDH7WPY5BL3ZEC9MUC`,
+		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=BJAE6JWBDH7WPY5BL3ZEC9MUC`,
 		{ mode: 'cors' }
 	);
 
@@ -13,26 +13,21 @@ const getWeatherFrom = async function getLocationWeather(location) {
 	return { data };
 };
 
-const getCurrentData = async function getLocationWeatherData(location) {
-	const weatherInfo = await getWeatherFrom(location);
+const getCurrentData = function getLocationWeatherData(data) {
+	let address = data.resolvedAddress;
+	let temperature = data.currentConditions.temp;
+	let condition = data.currentConditions.conditions;
+	let highTemp = data.days[0].tempmax;
+	let lowTemp = data.days[0].tempmin;
 
-	let address = weatherInfo.data.resolvedAddress;
-	let temperature = weatherInfo.data.currentConditions.temp;
-	let condition = weatherInfo.data.currentConditions.conditions;
-	let highTemp = weatherInfo.data.days[0].tempmax;
-	let lowTemp = weatherInfo.data.days[0].tempmin;
-	let forecast = weatherInfo.data.days;
-
-	return { address, temperature, condition, highTemp, lowTemp, forecast };
+	return { address, temperature, condition, highTemp, lowTemp };
 };
 
-const getForecastData = async function getWeatherForecast(location) {
-	const forecastInfo = (await getCurrentData(location)).forecast;
-
+const getForecastData = function getWeatherForecast(dataForecast) {
 	let forecast = [];
 
 	for (let day = 0; day < 7; day++) {
-		let currentDay = forecastInfo[day];
+		let currentDay = dataForecast[day];
 
 		let dayInfo = {
 			date: currentDay.datetime,
@@ -47,9 +42,15 @@ const getForecastData = async function getWeatherForecast(location) {
 	return { forecast };
 };
 
-export const locationWeather = async function groupedData(weatherLocation) {
-	const weatherInfo = await getCurrentData(weatherLocation);
-	const forecastInfo = (await getForecastData(weatherLocation)).forecast;
+export const locationWeather = async function groupedData(
+	weatherLocation,
+	unit = 'metric'
+) {
+	const weatherData = (await getWeatherFrom(weatherLocation, unit)).data;
+	const forecastData = (await weatherData).days;
+
+	const weatherInfo = getCurrentData(weatherData);
+	const forecastInfo = getForecastData(forecastData);
 
 	const weather = new CurrentWeather(
 		weatherInfo.temperature,
