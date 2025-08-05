@@ -46,3 +46,21 @@ const getForecastData = async function getWeatherForecast(location) {
 
 	return { forecast };
 };
+
+const groupWeatherData = async function groupedData(weatherLocation) {
+	const weatherInfo = await getCurrentData(weatherLocation);
+	const forecastInfo = (await getForecastData(weatherLocation)).forecast;
+
+	const weather = new CurrentWeather(
+		weatherInfo.temperature,
+		weatherInfo.condition,
+		weatherInfo.highTemp,
+		weatherInfo.lowTemp
+	);
+
+	const location = new Location(weatherInfo.address, weather, forecastInfo);
+
+	console.log(location);
+};
+
+groupWeatherData('Lisbon, Portugal');
