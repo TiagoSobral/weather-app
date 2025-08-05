@@ -61,4 +61,6 @@ export const locationWeather = async function groupedData(
 	const location = new Location(weatherInfo.address, weather, forecastInfo);
 
 	console.log(location);
+
+	return { location };
 };
