@@ -8,8 +8,6 @@ const getWeatherFrom = async function getLocationWeather(location, unit) {
 
 	const data = await promise.json();
 
-	console.log(data);
-
 	return { data };
 };
 
@@ -46,6 +44,7 @@ export const locationWeather = async function groupedData(
 	weatherLocation,
 	unit = 'metric'
 ) {
+	// debugger;
 	const weatherData = (await getWeatherFrom(weatherLocation, unit)).data;
 	const forecastData = (await weatherData).days;
 

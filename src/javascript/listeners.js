@@ -2,23 +2,15 @@ import { locationWeather } from './functions';
 
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');
-const addLocation = document.querySelector('button');
 
-export const buttonListener = function addLocationListener() {
-	addLocation.addEventListener('click', () => {
-		let searchValue = searchBox.value;
-
-		locationWeather(searchValue);
-	});
-};
-
-export const searchListener = function searchBoxListener() {
+export const formListener = function formSubmitListener() {
 	form.addEventListener('submit', (event) => {
-		debugger;
+		event.preventDefault();
+
 		let searchValue = searchBox.value;
 
 		if (!searchValue) {
-			return event.preventDefault();
+			return alert('Invalid Input');
 		}
 
 		locationWeather(searchValue);
