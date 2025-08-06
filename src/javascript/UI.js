@@ -1,16 +1,19 @@
-const currentInfoElem = document.querySelectorAll('.current-weather :not(ul)');
+const currentInfoElem = document.querySelectorAll(
+	'.current-weather :not(ul), .upcoming-conditions'
+);
 // const currHighLowTempElem = document.querySelectorAll('#current-max-min');
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
-	// debugger;
-	let currentWeatherInfo = weatherObject.current;
-	let currentWeatherLocation = weatherObject.location;
+	debugger;
+	let current = weatherObject.current;
+	let location = weatherObject.location;
 	let arrayOfCurrentInfo = [
-		currentWeatherLocation,
-		currentWeatherInfo.temperature,
-		currentWeatherInfo.condition,
-		currentWeatherInfo.high,
-		currentWeatherInfo.low,
+		location,
+		current.temperature,
+		current.currentCondition,
+		current.high,
+		current.low,
+		current.upcomingCondition,
 	];
 
 	for (let index = 0; index < arrayOfCurrentInfo.length; index++) {
