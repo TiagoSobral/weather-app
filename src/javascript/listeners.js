@@ -7,7 +7,6 @@ const searchBox = document.querySelector('input');
 export const formListener = function formSubmitListener() {
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-
 		let searchValue = searchBox.value;
 
 		if (!searchValue) {
@@ -15,11 +14,12 @@ export const formListener = function formSubmitListener() {
 		}
 
 		return new Promise((resolve) => {
-			let result = locationWeather(searchValue).location;
+			let result = locationWeather(searchValue);
 
 			resolve(result);
-		}).then((result) => displayCurrent(result));
-
-		// displayCurrent(weatherObject.location);
+		}).then((result) => {
+			let weatherLocation = result.location;
+			return displayCurrent(weatherLocation);
+		});
 	});
 };
