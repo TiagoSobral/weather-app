@@ -10,10 +10,10 @@ const getWeatherFrom = async function getLocationWeather(location, unit) {
 		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=BJAE6JWBDH7WPY5BL3ZEC9MUC`,
 		{ mode: 'cors' }
 	);
-
+	// debugger;
 	const data = await promise.json();
 
-	return { data };
+	return data;
 };
 
 const getCurrentData = function getLocationWeatherData(data) {
@@ -35,7 +35,7 @@ const getCurrentData = function getLocationWeatherData(data) {
 		lowTemp
 	);
 
-	return { current };
+	return current;
 };
 
 const getForecastData = function getWeatherForecast(dataForecast) {
@@ -54,7 +54,7 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 		forecast.push(dayInfo);
 	}
 
-	return { forecast };
+	return forecast;
 };
 
 const getHourlyData = function getWeatherHourly(hourlyData) {
@@ -70,15 +70,15 @@ const getHourlyData = function getWeatherHourly(hourlyData) {
 		return hourInfo;
 	});
 
-	return { hours };
+	return hours;
 };
 
 export const locationWeather = async function groupedData(
 	weatherLocation,
 	unit = 'metric'
 ) {
-	// debugger;
-	const weatherData = (await getWeatherFrom(weatherLocation, unit)).data;
+	debugger;
+	const weatherData = await getWeatherFrom(weatherLocation, unit);
 	const dailyData = (await weatherData).days;
 	const currentDay = 0;
 	const hourlyData = (await dailyData)[currentDay].hours;
