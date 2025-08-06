@@ -2,6 +2,7 @@ const currentInfoElem = document.querySelectorAll('.current-weather :not(ul)');
 // const currHighLowTempElem = document.querySelectorAll('#current-max-min');
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
+	// debugger;
 	let currentWeatherInfo = weatherObject.current;
 	let currentWeatherLocation = weatherObject.location;
 	let arrayOfCurrentInfo = [

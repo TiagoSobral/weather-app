@@ -7,6 +7,7 @@ const searchBox = document.querySelector('input');
 export const formListener = function formSubmitListener() {
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
+		// debugger;
 		let searchValue = searchBox.value;
 
 		if (!searchValue) {
@@ -18,7 +19,7 @@ export const formListener = function formSubmitListener() {
 
 			resolve(result);
 		}).then((result) => {
-			let weatherLocation = result.location;
+			let weatherLocation = result;
 			return displayCurrent(weatherLocation);
 		});
 	});

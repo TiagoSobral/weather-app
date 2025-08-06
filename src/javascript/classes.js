@@ -1,9 +1,6 @@
 export class Location {
-	constructor(location, current, forecast, hourly) {
+	constructor(location) {
 		this.location = location;
-		this.current = current;
-		this.forecast = forecast;
-		this.hourly = hourly;
 	}
 }
 

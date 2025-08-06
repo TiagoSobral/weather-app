@@ -17,12 +17,23 @@ const getWeatherFrom = async function getLocationWeather(location, unit) {
 };
 
 const getCurrentData = function getLocationWeatherData(data) {
-	let temperature = data.currentConditions.temp;
-	let condition = data.currentConditions.conditions;
-	let highTemp = data.days[0].tempmax;
-	let lowTemp = data.days[0].tempmin;
+	let weather = data;
+	let currentDay = 0;
 
-	const current = new CurrentWeather(temperature, condition, highTemp, lowTemp);
+	let temperature = weather.currentConditions.temp;
+	let condition = weather.currentConditions.conditions;
+	let upcomingCondition = weather.description;
+
+	let highTemp = weather.days[currentDay].tempmax;
+	let lowTemp = weather.days[currentDay].tempmin;
+
+	const current = new CurrentWeather(
+		temperature,
+		condition,
+		upcomingCondition,
+		highTemp,
+		lowTemp
+	);
 
 	return { current };
 };
@@ -66,7 +77,7 @@ export const locationWeather = async function groupedData(
 	weatherLocation,
 	unit = 'metric'
 ) {
-	debugger;
+	// debugger;
 	const weatherData = (await getWeatherFrom(weatherLocation, unit)).data;
 	const dailyData = (await weatherData).days;
 	const currentDay = 0;
@@ -82,5 +93,5 @@ export const locationWeather = async function groupedData(
 
 	console.log(weather);
 
-	return { weather };
+	return weather;
 };
