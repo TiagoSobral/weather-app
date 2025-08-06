@@ -1,10 +1,12 @@
+import { createListItem, createUl } from './elements';
+
 const currentInfoElem = document.querySelectorAll(
 	'.current-weather :not(ul), .upcoming-conditions'
 );
 // const currHighLowTempElem = document.querySelectorAll('#current-max-min');
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
-	debugger;
+	// debugger;
 	let current = weatherObject.current;
 	let location = weatherObject.location;
 	let arrayOfCurrentInfo = [
@@ -22,4 +24,23 @@ export const displayCurrent = function displayCurrentWeather(weatherObject) {
 
 		currentDomElement.textContent = currentElementOfArray;
 	}
+};
+
+export const displayHourly = function displayHourlyWeather(weatherObject) {
+	// debugger;
+	let weatherByHour = weatherObject.hours;
+	const elementByHour = document.querySelector('.weather-by-hour');
+
+	weatherByHour.forEach((element) => {
+		const elementValues = Object.values(element);
+		const elementKeys = Object.keys(element);
+		const ul = createUl('time', elementByHour);
+
+		for (let index = 0; index < elementKeys.length; index++) {
+			let currentKey = elementKeys[index];
+			let currentValue = elementValues[index];
+
+			createListItem(currentKey, currentValue, ul);
+		}
+	});
 };
