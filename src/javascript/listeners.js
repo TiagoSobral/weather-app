@@ -1,5 +1,5 @@
 import { locationWeather } from './functions';
-import { displayCurrent, displayHourly } from './ui';
+import { displayCurrent, displayHourly } from './UI.js';
 
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');

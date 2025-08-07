@@ -4,16 +4,14 @@ import {
 	HourlyWeather,
 	Location,
 } from './classes';
+import { retrieveCurrent, retrieveForecast, retrieveHourly } from './data';
 
 const getWeatherFrom = async function getLocationWeather(location, unit) {
-	const promise = await fetch(
-		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=BJAE6JWBDH7WPY5BL3ZEC9MUC`,
-		{ mode: 'cors' }
-	);
-	// debugger;
-	const data = await promise.json();
+	const current = await retrieveCurrent(location, unit);
+	const hourly = await retrieveHourly(location, unit);
+	const forecast = await retrieveForecast(location, unit);
 
-	return data;
+	return { current, hourly, forecast };
 };
 
 const getCurrentData = function getLocationWeatherData(data) {
@@ -35,14 +33,15 @@ const getCurrentData = function getLocationWeatherData(data) {
 		lowTemp
 	);
 
-	return current;
+	return { current };
 };
 
 const getForecastData = function getWeatherForecast(dataForecast) {
+	let nextSevenDays = dataForecast.days;
 	let forecast = [];
 
-	for (let day = 0; day < 7; day++) {
-		let currentDay = dataForecast[day];
+	for (let day = 0; day < 8; day++) {
+		let currentDay = nextSevenDays[day];
 
 		let dayInfo = new DailyWeather(
 			currentDay.datetime,
@@ -54,23 +53,32 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 		forecast.push(dayInfo);
 	}
 
-	return forecast;
+	return { forecast };
 };
 
 const getHourlyData = function getWeatherHourly(hourlyData) {
-	let hours = hourlyData.map((hour) => {
+	let upcomingHours = hourlyData.days[0].hours;
+	let tomorrowHours = hourlyData.days[1].hours;
+
+	let filteredUpcomingHours = upcomingHours.filter(
+		(element) => element.temp !== undefined
+	);
+
+	let nextHours = filteredUpcomingHours.concat(tomorrowHours);
+
+	let hours = nextHours.map((hour) => {
 		let currentHour = hour;
 
 		let hourInfo = new HourlyWeather(
 			currentHour.datetime,
-			currentHour.conditions,
+			currentHour.icon,
 			currentHour.temp
 		);
 
 		return hourInfo;
 	});
 
-	return hours;
+	return { hours };
 };
 
 export const locationWeather = async function groupedData(
@@ -79,17 +87,24 @@ export const locationWeather = async function groupedData(
 ) {
 	debugger;
 	const weatherData = await getWeatherFrom(weatherLocation, unit);
-	const dailyData = (await weatherData).days;
-	const currentDay = 0;
-	const hourlyData = (await dailyData)[currentDay].hours;
+	const address = weatherData.current.resolvedAddress;
 
-	const current = getCurrentData(weatherData);
-	const forecast = getForecastData(dailyData);
-	const hourlyForecast = getHourlyData(hourlyData);
+	const dailyData = weatherData.forecast;
+	const currentData = weatherData.current;
+	const hourlyData = weatherData.hourly;
 
-	const location = new Location(weatherData.address);
+	const currentWeather = getCurrentData(currentData);
+	const forecastWeather = getForecastData(dailyData);
+	const hourlyWeather = getHourlyData(hourlyData);
 
-	const weather = Object.assign(location, current, hourlyForecast, forecast);
+	const location = new Location(address);
+
+	const weather = Object.assign(
+		location,
+		currentWeather,
+		hourlyWeather,
+		forecastWeather
+	);
 
 	console.log(weather);
 
