@@ -15,11 +15,11 @@ export class CurrentWeather {
 }
 
 export class DailyWeather {
-	constructor(date, conditions, high, low) {
+	constructor(date, conditions, low, high) {
 		this.date = date;
 		this.conditions = conditions;
-		this.high = high;
 		this.low = low;
+		this.high = high;
 	}
 }
 

@@ -37,6 +37,7 @@ const getCurrentData = function getLocationWeatherData(data) {
 };
 
 const getForecastData = function getWeatherForecast(dataForecast) {
+	debugger;
 	let nextSevenDays = dataForecast.days;
 	let forecast = [];
 
@@ -45,9 +46,9 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 
 		let dayInfo = new DailyWeather(
 			currentDay.datetime,
-			currentDay.tempmax,
+			currentDay.conditions,
 			currentDay.tempmin,
-			currentDay.conditions
+			currentDay.tempmax
 		);
 
 		forecast.push(dayInfo);
@@ -57,13 +58,16 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 };
 
 const getHourlyData = function getWeatherHourly(hourlyData) {
+	// hours come from json separated by days
 	let upcomingHours = hourlyData.days[0].hours;
 	let tomorrowHours = hourlyData.days[1].hours;
 
+	// filter non existent hours or with no forecast
 	let filteredUpcomingHours = upcomingHours.filter(
 		(element) => element.temp !== undefined
 	);
 
+	// combine the hours in a single array
 	let nextHours = filteredUpcomingHours.concat(tomorrowHours);
 
 	let hours = nextHours.map((hour) => {
@@ -85,7 +89,7 @@ export const locationWeather = async function groupedData(
 	weatherLocation,
 	unit = 'metric'
 ) {
-	debugger;
+	// debugger;
 	const weatherData = await getWeatherFrom(weatherLocation, unit);
 	const address = weatherData.current.resolvedAddress;
 

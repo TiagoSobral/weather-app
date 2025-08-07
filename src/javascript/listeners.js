@@ -1,5 +1,5 @@
 import { locationWeather } from './functions';
-import { displayCurrent, displayHourly } from './UI.js';
+import { displayCurrent, displayDaily, displayHourly } from './UI.js';
 
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');
@@ -28,6 +28,7 @@ export const formListener = function formSubmitListener() {
 			})
 			.then((result) => {
 				displayHourly(result);
+				displayDaily(result);
 			});
 	});
 };

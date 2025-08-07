@@ -1,4 +1,5 @@
 import { createListItem, createUl } from './elements';
+import { format } from 'date-fns';
 
 const currentInfoElem = document.querySelectorAll(
 	'.current-weather :not(ul), .upcoming-conditions'
@@ -42,5 +43,37 @@ export const displayHourly = function displayHourlyWeather(weatherObject) {
 
 			createListItem(currentKey, currentValue, ul);
 		}
+	});
+};
+
+export const displayDaily = function displayDailyWeather(weatherObject) {
+	debugger;
+	let weatherByDay = weatherObject.forecast;
+	const elementByDay = document.querySelector('.forecast-daily-weather');
+
+	weatherByDay.forEach((element) => {
+		const elementValues = Object.values(element);
+		const elementKeys = Object.keys(element);
+		const ul = createUl('time', elementByDay);
+
+		for (let index = 0; index < elementKeys.length; index++) {
+			// debugger;
+			let currentKey = elementKeys[index];
+			let currentValue = elementValues[index];
+
+			createListItem(currentKey, currentValue, ul);
+		}
+	});
+
+	changeDates();
+};
+
+const changeDates = function changeDatesToDays() {
+	const dates = document.querySelectorAll('.date');
+
+	dates.forEach((date) => {
+		let newDate = format(date.textContent, 'EEE');
+
+		date.textContent = newDate;
 	});
 };
