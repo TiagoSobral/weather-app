@@ -7,6 +7,8 @@ import {
 import { retrieveCurrent, retrieveForecast, retrieveHourly } from './data';
 
 const getWeatherFrom = async function getLocationWeather(location, unit) {
+	// fetches three types of data, current conditions, hourly and daily
+
 	const current = await retrieveCurrent(location, unit);
 	const hourly = await retrieveHourly(location, unit);
 	const forecast = await retrieveForecast(location, unit);
@@ -16,6 +18,7 @@ const getWeatherFrom = async function getLocationWeather(location, unit) {
 
 const getCurrentData = function getLocationWeatherData(data) {
 	let weather = data;
+	// current day is 0 because json comes in an array of days so 0 is the current day.
 	let currentDay = 0;
 
 	let temperature = weather.currentConditions.temp;
@@ -37,10 +40,11 @@ const getCurrentData = function getLocationWeatherData(data) {
 };
 
 const getForecastData = function getWeatherForecast(dataForecast) {
-	debugger;
+	// debugger;
 	let nextSevenDays = dataForecast.days;
 	let forecast = [];
 
+	// it will return only 7 days of forecast instead of all of them.
 	for (let day = 0; day < 8; day++) {
 		let currentDay = nextSevenDays[day];
 
@@ -93,6 +97,7 @@ export const locationWeather = async function groupedData(
 	const weatherData = await getWeatherFrom(weatherLocation, unit);
 	const address = weatherData.current.resolvedAddress;
 
+	// filter data to feed to the functions that are expecting specific type of data.
 	const dailyData = weatherData.forecast;
 	const currentData = weatherData.current;
 	const hourlyData = weatherData.hourly;
@@ -103,6 +108,7 @@ export const locationWeather = async function groupedData(
 
 	const location = new Location(address);
 
+	// object.assign to avoid tightly coupled and using composition.
 	const weather = Object.assign(
 		location,
 		currentWeather,

@@ -4,10 +4,8 @@ import { format } from 'date-fns';
 const currentInfoElem = document.querySelectorAll(
 	'.current-weather :not(ul), .upcoming-conditions'
 );
-// const currHighLowTempElem = document.querySelectorAll('#current-max-min');
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
-	// debugger;
 	let current = weatherObject.current;
 	let location = weatherObject.location;
 	let arrayOfCurrentInfo = [
@@ -23,12 +21,15 @@ export const displayCurrent = function displayCurrentWeather(weatherObject) {
 		let currentElementOfArray = arrayOfCurrentInfo[index];
 		let currentDomElement = currentInfoElem[index];
 
+		if (!isNaN(currentElementOfArray)) {
+			currentDomElement.textContent = `${Math.trunc(currentElementOfArray)}°`;
+			continue;
+		}
 		currentDomElement.textContent = currentElementOfArray;
 	}
 };
 
 export const displayHourly = function displayHourlyWeather(weatherObject) {
-	// debugger;
 	let weatherByHour = weatherObject.hours;
 	const elementByHour = document.querySelector('.weather-by-hour');
 
@@ -47,7 +48,6 @@ export const displayHourly = function displayHourlyWeather(weatherObject) {
 };
 
 export const displayDaily = function displayDailyWeather(weatherObject) {
-	debugger;
 	let weatherByDay = weatherObject.forecast;
 	const elementByDay = document.querySelector('.forecast-daily-weather');
 
@@ -57,7 +57,6 @@ export const displayDaily = function displayDailyWeather(weatherObject) {
 		const ul = createUl('time', elementByDay);
 
 		for (let index = 0; index < elementKeys.length; index++) {
-			// debugger;
 			let currentKey = elementKeys[index];
 			let currentValue = elementValues[index];
 
