@@ -1,5 +1,5 @@
 #weather-location,
-button {
+button #weather-location:active {
 	appearance: none;
 
 	border: none;
@@ -7,10 +7,18 @@ button {
 
 	height: 1.5rem;
 	padding-left: 0.4rem;
+
+	background: none;
+
+	backdrop-filter: blur(400rem);
 }
 
 header {
 	display: flex;
 	justify-content: end;
-	margin: 1rem 1rem 3rem 1rem;
+	margin: 1rem 1rem 1rem 1rem;
+}
+
+input[type='search'] {
+	appearance: none;
 }
