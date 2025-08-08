@@ -5,7 +5,9 @@
 	justify-self: center;
 	align-self: center;
 
-	width: 48%;
+	width: 60%;
+
+	padding: 1rem 1rem;
 }
 
 .forecast-daily-weather > .time {
@@ -16,4 +18,10 @@
 
 	align-items: center;
 	justify-items: center;
+}
+
+.forecast-daily-weather {
+	border: solid black 1px;
+
+	border-radius: 1rem;
 }

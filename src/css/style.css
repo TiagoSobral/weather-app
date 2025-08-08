@@ -1,3 +1,13 @@
+@font-face {
+	font-family: 'Montserrat'; /*MAIN FONT*/
+	src:
+		url('../font/Montserrat-Regular.woff2') format('woff2'),
+		url('../font/Montserrat-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: auto;
+}
+
 /* remove styling from list */
 ul {
 	list-style: none;
@@ -14,4 +24,6 @@ main {
 
 :root {
 	background-color: rgb(94, 136, 169);
+
+	font-family: 'Montserrat';
 }

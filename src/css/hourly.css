@@ -2,11 +2,11 @@
 	display: flex;
 	gap: 2rem;
 
-	width: 48%;
-	justify-self: center;
 	overflow-x: scroll;
 
-	justify-content: start;
+	margin: 0rem 0.2rem;
+
+	text-align: center;
 }
 
 .weather-by-hour > .time {
@@ -16,5 +16,15 @@
 
 	grid-template-rows: repeat(3, 2rem);
 
-	gap: 1rem;
+	gap: 1.2rem;
+}
+.current-hourly-weather {
+	width: 65%;
+
+	border: solid 1px black;
+	border-radius: 1rem;
+
+	justify-self: center;
+
+	padding: 0 1rem;
 }
