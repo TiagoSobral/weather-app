@@ -1,0 +1,19 @@
+.current-weather {
+	justify-items: center;
+	justify-self: center;
+
+	width: 12rem;
+}
+
+#current-max-min {
+	display: flex;
+
+	gap: 3rem;
+}
+
+.current-weather {
+	border: solid black 1px;
+	border-radius: 1rem;
+
+	backdrop-filter: blur(10px);
+}

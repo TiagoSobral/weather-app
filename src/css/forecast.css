@@ -1,0 +1,19 @@
+.forecast-daily-weather {
+	display: flex;
+	flex-direction: column;
+
+	justify-self: center;
+	align-self: center;
+
+	width: 48%;
+}
+
+.forecast-daily-weather > .time {
+	display: grid;
+
+	grid-template-columns: 0.5fr 1fr repeat(2, 0.5fr);
+	gap: 1rem;
+
+	align-items: center;
+	justify-items: center;
+}

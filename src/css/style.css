@@ -1,0 +1,17 @@
+/* remove styling from list */
+ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+main {
+	display: grid;
+	grid-template-columns: 50rem;
+	gap: 3rem;
+
+	justify-content: center;
+}
+
+:root {
+	background-color: rgb(94, 136, 169);
+}
