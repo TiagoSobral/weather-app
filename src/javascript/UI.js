@@ -76,3 +76,7 @@ const changeDates = function changeDatesToDays() {
 		date.textContent = newDate;
 	});
 };
+
+export const clearValues = function clearContent() {
+	currentInfoElem.forEach((element) => (element.textContent = ''));
+};

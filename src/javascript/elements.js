@@ -40,3 +40,13 @@ export const createUl = function createListGroup(classIdentifier, parent) {
 
 	return ul;
 };
+
+export const eraseElements = function eraseElementsForNewSearch() {
+	const time = document.querySelectorAll('.time');
+
+	if (time.length === 0) {
+		return;
+	}
+
+	time.forEach((element) => element.remove());
+};

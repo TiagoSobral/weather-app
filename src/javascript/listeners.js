@@ -1,6 +1,11 @@
-import { elementsVisibility } from './elements.js';
+import { elementsVisibility, eraseElements } from './elements.js';
 import { locationWeather } from './functions';
-import { displayCurrent, displayDaily, displayHourly } from './UI.js';
+import {
+	clearValues,
+	displayCurrent,
+	displayDaily,
+	displayHourly,
+} from './UI.js';
 
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');
@@ -8,7 +13,11 @@ const searchBox = document.querySelector('input');
 export const formListener = function formSubmitListener() {
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-		// debugger;
+
+		// making sure all the elements are clean before choosing another location
+		clearValues();
+		eraseElements();
+
 		let searchValue = searchBox.value;
 
 		if (!searchValue) {
@@ -30,8 +39,11 @@ export const formListener = function formSubmitListener() {
 			.then((result) => {
 				displayHourly(result);
 				displayDaily(result);
+
 				weatherBackground();
 				elementsVisibility('true');
+
+				searchBox.value = '';
 			});
 	});
 };
