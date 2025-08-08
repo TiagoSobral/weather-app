@@ -1,3 +1,13 @@
+export const elementsVisibility = function changeVisibility(bolean = 'false') {
+	const main = document.querySelector('main');
+
+	if (bolean === 'true') {
+		return (main.style.visibility = 'visible');
+	}
+
+	main.style.visibility = 'hidden';
+};
+
 export const createListItem = function createListItem(
 	classIdentifier,
 	text,
