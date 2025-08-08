@@ -1,3 +1,4 @@
+import { elementsVisibility } from './elements.js';
 import { locationWeather } from './functions';
 import { displayCurrent, displayDaily, displayHourly } from './UI.js';
 
@@ -29,6 +30,17 @@ export const formListener = function formSubmitListener() {
 			.then((result) => {
 				displayHourly(result);
 				displayDaily(result);
+				weatherBackground();
+				elementsVisibility('true');
 			});
 	});
+};
+
+const weatherBackground = function weatherListener() {
+	const weather = document.querySelector('#current-condition').textContent;
+	const body = document.querySelector('body');
+
+	if (weather === 'Clear') {
+		body.className = 'clear';
+	}
 };

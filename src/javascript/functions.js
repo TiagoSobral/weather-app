@@ -17,13 +17,14 @@ const getWeatherFrom = async function getLocationWeather(location, unit) {
 };
 
 const getCurrentData = function getLocationWeatherData(data) {
+	// debugger;
 	let weather = data;
 	// current day is 0 because json comes in an array of days so 0 is the current day.
 	let currentDay = 0;
 
 	let temperature = weather.currentConditions.temp;
 	let condition = weather.currentConditions.conditions;
-	let upcomingCondition = weather.description;
+	let upcomingCondition = weather.days[currentDay].description;
 
 	let highTemp = weather.days[currentDay].tempmax;
 	let lowTemp = weather.days[currentDay].tempmin;
