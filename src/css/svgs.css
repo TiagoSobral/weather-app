@@ -1,0 +1,29 @@
+.conditions {
+	width: 30px;
+	height: 30px;
+
+	background-size: contain;
+
+	justify-self: center;
+}
+
+.conditions[data-conditions='clear-day'] {
+	background-image: url('../svgs/sun.svg');
+}
+
+.conditions[data-conditions='clear-night'],
+.conditions[data-conditions='partly-cloudy-night'] {
+	background-image: url('../svgs/night.svg');
+}
+
+.conditions[data-conditions='partly-cloudy-day'] {
+	background-image: url('../svgs/partially-cloudy.svg');
+}
+
+.conditions[data-conditions='cloudy'] {
+	background-image: url('../svgs/partially-cloudy.svg');
+}
+
+.conditions[data-conditions='rain'] {
+	background-image: url('../svgs/rainning.svg');
+}
