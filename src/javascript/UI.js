@@ -65,6 +65,8 @@ export const displayDaily = function displayDailyWeather(weatherObject) {
 	});
 
 	changeDates();
+	changeTime();
+	conditionsAsClass();
 };
 
 const changeDates = function changeDatesToDays() {
@@ -77,6 +79,28 @@ const changeDates = function changeDatesToDays() {
 	});
 };
 
+const changeTime = function alterTimeFormat() {
+	const hoursElem = document.querySelectorAll('.hours');
+	debugger;
+
+	hoursElem.forEach((element) => {
+		let result = element.textContent.slice(0, 5);
+		element.textContent = result;
+	});
+};
+
 export const clearValues = function clearContent() {
 	currentInfoElem.forEach((element) => (element.textContent = ''));
+};
+
+const conditionsAsClass = function setContentAsClassName() {
+	const conditionsElem = document.querySelectorAll('.conditions');
+
+	conditionsElem.forEach((condition) => {
+		let value = condition.textContent.toLocaleLowerCase();
+
+		condition.setAttribute('data-conditions', `${value}`);
+
+		condition.textContent = '';
+	});
 };
