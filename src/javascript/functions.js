@@ -51,7 +51,7 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 
 		let dayInfo = new DailyWeather(
 			currentDay.datetime,
-			currentDay.conditions,
+			currentDay.icon,
 			currentDay.tempmin,
 			currentDay.tempmax
 		);
