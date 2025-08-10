@@ -1,3 +1,36 @@
+img.current-icon {
+	width: 6rem;
+}
+
+.current-high::before,
+.current-low::before {
+	position: absolute;
+
+	content: '';
+
+	width: 15px;
+	height: 15px;
+
+	background-size: contain;
+
+	top: 2px;
+}
+
+.current-high,
+.current-low {
+	position: relative;
+}
+
+.current-high::before {
+	background-image: url('../svgs/tempMax.svg');
+	left: -22px;
+}
+
+.current-low::before {
+	background-image: url('../svgs/tempLow.svg');
+	right: -22px;
+}
+
 .conditions {
 	width: 30px;
 	height: 30px;
@@ -21,7 +54,7 @@
 }
 
 .conditions[data-conditions='cloudy'] {
-	background-image: url('../svgs/partially-cloudy.svg');
+	background-image: url('../svgs/cloudy.svg');
 }
 
 .conditions[data-conditions='rain'] {
