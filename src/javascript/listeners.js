@@ -1,5 +1,5 @@
 import { elementsVisibility, eraseElements } from './elements.js';
-import { locationWeather } from './functions';
+import { locationWeather, searchWeather } from './functions';
 import {
 	clearValues,
 	displayCurrent,
@@ -24,27 +24,12 @@ export const formListener = function formSubmitListener() {
 			return alert('Invalid Input');
 		}
 
-		return new Promise((resolve) => {
-			let result = locationWeather(searchValue);
+		searchWeather(searchValue).then(() => {
+			weatherBackground();
+			elementsVisibility('true');
 
-			resolve(result);
-		})
-			.then((result) => {
-				let weatherLocation = result;
-
-				displayCurrent(weatherLocation);
-
-				return weatherLocation;
-			})
-			.then((result) => {
-				displayHourly(result);
-				displayDaily(result);
-
-				weatherBackground();
-				elementsVisibility('true');
-
-				searchBox.value = '';
-			});
+			searchBox.value = '';
+		});
 	});
 };
 
