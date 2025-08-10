@@ -5,6 +5,7 @@ import {
 	Location,
 } from './classes';
 import { retrieveCurrent, retrieveForecast, retrieveHourly } from './data';
+import { displayCurrent, displayDaily, displayHourly } from './UI';
 
 const getWeatherFrom = async function getLocationWeather(location, unit) {
 	// fetches three types of data, current conditions, hourly and daily
@@ -134,4 +135,19 @@ const filterHours = function filterHoursWhenSpreadTwoDays(hourlyData) {
 	}
 
 	return filteredUpcomingHours;
+};
+
+export const searchWeather = function getWeatherFromSearch(searchValue) {
+	return new Promise((resolve) => {
+		let result = locationWeather(searchValue);
+
+		resolve(result);
+	}).then((result) => {
+		let weatherLocation = result;
+
+		displayCurrent(weatherLocation);
+
+		displayHourly(weatherLocation);
+		displayDaily(weatherLocation);
+	});
 };
