@@ -2,7 +2,7 @@
 	justify-items: center;
 	justify-self: center;
 
-	width: 12rem;
+	width: 69%;
 }
 
 #current-max-min {
@@ -17,4 +17,9 @@
 	backdrop-filter: blur(100rem);
 
 	box-shadow: 0rem 0rem 0.3rem 0.1rem rgba(0, 0, 0, 0.156);
+}
+
+h3 {
+	border-bottom: solid white 1px;
+	padding-bottom: 0.2rem;
 }

@@ -5,15 +5,16 @@
 	justify-self: center;
 	align-self: center;
 
-	width: 60%;
+	width: 65%;
 
 	padding: 1rem 1rem;
 }
 
-.forecast-daily-weather > .time {
+.forecast-daily-weather > .time,
+.forecast-header {
 	display: grid;
 
-	grid-template-columns: 0.5fr 1fr repeat(2, 0.5fr);
+	grid-template-columns: repeat(4, 0.5fr);
 	gap: 1rem;
 
 	align-items: center;
@@ -26,4 +27,12 @@
 	backdrop-filter: blur(100rem);
 
 	box-shadow: 0rem 0rem 0.3rem 0.1rem rgba(0, 0, 0, 0.156);
+}
+
+.forecast-header {
+	border-bottom: solid 1px white;
+
+	padding-bottom: 1.2rem;
+
+	margin: 0.5rem 0 0 0;
 }
