@@ -63,17 +63,8 @@ const getForecastData = function getWeatherForecast(dataForecast) {
 };
 
 const getHourlyData = function getWeatherHourly(hourlyData) {
-	// hours come from json separated by days
-	let upcomingHours = hourlyData.days[0].hours;
-	let tomorrowHours = hourlyData.days[1].hours;
-
-	// filter non existent hours or with no forecast
-	let filteredUpcomingHours = upcomingHours.filter(
-		(element) => element.temp !== undefined
-	);
-
-	// combine the hours in a single array
-	let nextHours = filteredUpcomingHours.concat(tomorrowHours);
+	// debugger;
+	let nextHours = filterHours(hourlyData);
 
 	let hours = nextHours.map((hour) => {
 		let currentHour = hour;
@@ -120,4 +111,27 @@ export const locationWeather = async function groupedData(
 	console.log(weather);
 
 	return weather;
+};
+
+const filterHours = function filterHoursWhenSpreadTwoDays(hourlyData) {
+	// hours come from json separated by days
+	let upcomingHours = hourlyData.days[0].hours;
+	let hourlyDataLength = hourlyData.days.length;
+
+	// filter non existent hours or with no forecast
+	let filteredUpcomingHours = upcomingHours.filter(
+		(element) => element.temp !== undefined
+	);
+
+	if (hourlyDataLength > 1) {
+		// get the hours that overlap to the next day.
+		let tomorrowHours = hourlyData.days[1].hours;
+
+		// combine the hours in a single array
+		let nextHours = filteredUpcomingHours.concat(tomorrowHours);
+
+		return nextHours;
+	}
+
+	return filteredUpcomingHours;
 };
