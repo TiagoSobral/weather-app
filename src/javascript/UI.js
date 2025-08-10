@@ -2,7 +2,7 @@ import { createListItem, createUl } from './elements';
 import { format } from 'date-fns';
 
 const currentInfoElem = document.querySelectorAll(
-	'.current-weather :not(ul), .upcoming-conditions'
+	'.current-weather :not(ul,img), .upcoming-conditions'
 );
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
@@ -81,7 +81,6 @@ const changeDates = function changeDatesToDays() {
 
 const changeTime = function alterTimeFormat() {
 	const hoursElem = document.querySelectorAll('.hours');
-	debugger;
 
 	hoursElem.forEach((element) => {
 		let result = element.textContent.slice(0, 5);
