@@ -1,3 +1,4 @@
+import { getGeolocation } from './data.js';
 import { elementsVisibility, eraseElements } from './elements.js';
 import { searchWeather } from './functions';
 import { clearValues } from './UI.js';
@@ -5,6 +6,21 @@ import { clearValues } from './UI.js';
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');
 const body = document.querySelector('body');
+
+export const pageLoadListener = function listenToGeolocation() {
+	window.addEventListener('load', async () => {
+		// gets geolocation if user allows it, it will give exact coordinates
+		const location = await getGeolocation();
+
+		// uses searchWeather the same way search input uses.
+		await searchWeather(location);
+
+		// uses await and then calls all the styling functions and shows visibility
+		weatherBackground();
+		currentWeatherBG();
+		elementsVisibility('true');
+	});
+};
 
 export const formListener = function formSubmitListener() {
 	form.addEventListener('submit', (event) => {

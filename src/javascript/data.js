@@ -1,3 +1,6 @@
+import { longFormatters } from 'date-fns';
+import { searchWeather } from './functions';
+
 export const retrieveForecast = async function retrieveForecastWeather(
 	location,
 	units = 'metric'
@@ -38,4 +41,31 @@ export const retrieveCurrent = async function retrieveCurrentWeather(
 	const current = await promise.json();
 
 	return current;
+};
+
+export const getGeolocation = function getCurrentGeolocation() {
+	// new promise has to be return in order to get the coordinates back.
+	// otherwise it returns undefined.
+	return new Promise((resolve) => {
+		const success = (position) => {
+			debugger;
+			let location = position.coords;
+
+			let latitude = location.latitude.toFixed(4);
+
+			let longitude = location.longitude.toFixed(4);
+
+			let located = `${latitude},${longitude}`;
+
+			//success resolves the located string which are the coordinates.
+			resolve(located);
+		};
+
+		const error = () => {
+			alert('Geolocation not allowed, use search to set location!');
+		};
+
+		//gets the location from geolocation api.
+		navigator.geolocation.getCurrentPosition(success, error);
+	}).then((result) => result);
 };
