@@ -48,7 +48,6 @@ export const getGeolocation = function getCurrentGeolocation() {
 	// otherwise it returns undefined.
 	return new Promise((resolve) => {
 		const success = (position) => {
-			debugger;
 			let location = position.coords;
 
 			let latitude = location.latitude.toFixed(4);
