@@ -9,13 +9,17 @@
 
 	backdrop-filter: blur(400rem);
 
-	background: none;
+	background-color: rgba(95, 158, 160, 0.306);
 }
 
 header {
 	display: flex;
-	justify-content: end;
+	justify-content: space-between;
 	margin: 1rem 1rem 1rem 1rem;
+}
+
+.title {
+	font-size: 1.5rem;
 }
 
 ::placeholder,
