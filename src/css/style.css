@@ -8,6 +8,12 @@
 	font-display: auto;
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 /* remove styling from list */
 ul {
 	list-style: none;
@@ -27,15 +33,22 @@ main {
 
 	justify-content: center;
 	justify-items: center;
+
+	padding-bottom: 2rem;
+}
+
+body {
+	display: grid;
+
+	grid-template-rows: 1fr 15fr;
 }
 
 body {
 	font-family: 'Montserrrat', helvetica, sans-serif;
 	color: white;
 
-	margin-bottom: 2rem;
+	background-size: cover;
 
-	background-image: url('../images/default-image.jpeg');
-
-	background-size: 1500px;
+	margin: 0;
+	padding: 0;
 }

@@ -9,6 +9,8 @@ const body = document.querySelector('body');
 
 export const pageLoadListener = function listenToGeolocation() {
 	window.addEventListener('load', async () => {
+		debugger;
+		await weatherBackground();
 		// gets geolocation if user allows it, it will give exact coordinates
 		const location = await getGeolocation();
 
@@ -48,11 +50,19 @@ export const formListener = function formSubmitListener() {
 
 const weatherBackground = async function weatherListener() {
 	const weather = document.querySelector('.time:first-of-type > .conditions');
-	let value = weather.dataset.conditions;
+
+	let value;
+
+	if (weather === null) {
+		value = 'default-image';
+	} else {
+		value = weather.dataset.conditions;
+	}
 
 	const { default: img } = await import(`../images/${value}.jpg`);
 
 	body.style.backgroundImage = `url(${img})`;
+	body.style.backgroundColor = '';
 };
 
 const currentWeatherBG = async function currentWeatherBackground() {
