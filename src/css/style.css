@@ -23,32 +23,28 @@ ul {
 h3,
 h1,
 h4 {
-	margin: 1rem 0;
+	margin: 0.5rem 0;
 }
 
 main {
 	display: grid;
 	grid-template-columns: 50rem;
 	gap: 3rem;
-
 	justify-content: center;
 	justify-items: center;
-
 	padding-bottom: 2rem;
+	height: 100%;
 }
 
 body {
 	display: grid;
-
 	grid-template-rows: 1fr 15fr;
 }
 
 body {
 	font-family: 'Montserrrat', helvetica, sans-serif;
 	color: white;
-
 	background-size: cover;
-
 	margin: 0;
 	padding: 0;
 }

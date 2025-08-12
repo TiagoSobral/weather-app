@@ -9,7 +9,7 @@ const body = document.querySelector('body');
 
 export const pageLoadListener = function listenToGeolocation() {
 	window.addEventListener('load', async () => {
-		debugger;
+		// debugger;
 		await weatherBackground();
 		// gets geolocation if user allows it, it will give exact coordinates
 		const location = await getGeolocation();

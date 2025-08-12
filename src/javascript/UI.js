@@ -2,10 +2,11 @@ import { createListItem, createUl } from './elements';
 import { format } from 'date-fns';
 
 const currentInfoElem = document.querySelectorAll(
-	'.current-weather :not(ul,img), .upcoming-conditions'
+	'#current-location, #current-temperature, #current-condition, .current-high, .current-low, .upcoming-conditions'
 );
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
+	debugger;
 	let current = weatherObject.current;
 	let location = weatherObject.location;
 	let arrayOfCurrentInfo = [

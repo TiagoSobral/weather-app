@@ -1,18 +1,26 @@
 .current-weather {
 	display: grid;
-
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(3, 0.5fr);
-
+	grid-template-rows: repeat(4, 0.5fr);
 	justify-items: center;
-
-	width: 69%;
+	width: 65%;
+	padding: 0 1rem;
+	align-items: center;
 }
 
 #current-location,
 #current-temperature,
-#current-max-min {
+#current-max-min,
+.status {
 	grid-column: 1/2;
+}
+
+.status {
+	grid-row: 2/3;
+}
+
+#current-temperature {
+	grid-row: 3/4;
 }
 
 #current-condition {
@@ -33,13 +41,11 @@
 
 .current-weather {
 	border-radius: 1rem;
-
 	backdrop-filter: blur(100rem);
-
 	box-shadow: 0rem 0rem 0.3rem 0.1rem rgba(0, 0, 0, 0.156);
 }
 
 h3 {
 	border-bottom: solid white 1px;
-	padding-bottom: 0.2rem;
+	/* padding-bottom: 0.2rem; */
 }
