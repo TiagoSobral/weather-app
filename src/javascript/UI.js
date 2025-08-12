@@ -6,7 +6,6 @@ const currentInfoElem = document.querySelectorAll(
 );
 
 export const displayCurrent = function displayCurrentWeather(weatherObject) {
-	debugger;
 	let current = weatherObject.current;
 	let location = weatherObject.location;
 	let arrayOfCurrentInfo = [
@@ -23,7 +22,7 @@ export const displayCurrent = function displayCurrentWeather(weatherObject) {
 		let currentDomElement = currentInfoElem[index];
 
 		if (!isNaN(currentElementOfArray)) {
-			currentDomElement.textContent = `${Math.trunc(currentElementOfArray)}°`;
+			currentDomElement.textContent = `${Math.trunc(currentElementOfArray)}°C`;
 			continue;
 		}
 		currentDomElement.textContent = currentElementOfArray;
@@ -102,5 +101,25 @@ const conditionsAsClass = function setContentAsClassName() {
 		condition.setAttribute('data-conditions', `${value}`);
 
 		condition.textContent = '';
+	});
+};
+
+export const convertUnits = function unitConversion(boolean) {
+	const temperatures = document.querySelectorAll(
+		'#current-temperature, .current-high, .current-low, .temperature, .low , .high'
+	);
+
+	temperatures.forEach((element) => {
+		const elemValue = element.textContent;
+
+		const temperature = elemValue.slice(0, 2);
+
+		if (boolean) {
+			const fahrenheit = Math.trunc(Number(temperature) * 1.8 + 32);
+			element.textContent = `${fahrenheit}°F`;
+		} else {
+			const celsius = Math.trunc((Number(temperature) - 32) / 1.8);
+			element.textContent = `${celsius}°C`;
+		}
 	});
 };

@@ -6,9 +6,10 @@ import '../css/search.css';
 import '../css/svgs.css';
 import '../css/toggle.css';
 
-import { formListener, pageLoadListener } from './listeners';
+import { formListener, pageLoadListener, toggleSwitch } from './listeners';
 import { elementsVisibility } from './elements';
 
 elementsVisibility();
 pageLoadListener();
 formListener();
+toggleSwitch();

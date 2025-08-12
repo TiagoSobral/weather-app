@@ -18,7 +18,7 @@ export const createListItem = function createListItem(
 
 	if (!isNaN(text)) {
 		// if its a number such as temperature it removes the decimal case
-		li.textContent = `${Math.trunc(text)}°`;
+		li.textContent = `${Math.trunc(text)}°C`;
 	} else {
 		li.textContent = text;
 	}

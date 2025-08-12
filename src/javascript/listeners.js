@@ -1,7 +1,7 @@
 import { getGeolocation } from './data.js';
 import { elementsVisibility, eraseElements } from './elements.js';
 import { searchWeather } from './functions';
-import { clearValues } from './UI.js';
+import { clearValues, convertUnits } from './UI.js';
 
 const form = document.querySelector('form');
 const searchBox = document.querySelector('input');
@@ -66,7 +66,6 @@ const weatherBackground = async function weatherListener() {
 };
 
 const currentWeatherBG = async function currentWeatherBackground() {
-	// debugger;
 	const weather = document.querySelector('.time:first-of-type > .conditions');
 
 	const currentCondition = document.querySelector('.current-icon');
@@ -98,4 +97,15 @@ const currentWeatherBG = async function currentWeatherBackground() {
 	const { default: img } = await import(`../svgs/${value}.svg`);
 
 	currentCondition.src = `${img}`;
+};
+
+export const toggleSwitch = function switchUnits() {
+	const toggle = document.querySelector('.status');
+
+	toggle.addEventListener('click', () => {
+		debugger;
+		const active = toggle.classList.toggle('active');
+
+		convertUnits(active);
+	});
 };
