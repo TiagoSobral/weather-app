@@ -1,0 +1,49 @@
+.status-toggle {
+	width: 100%;
+	margin: 0.5rem 0;
+}
+
+.status {
+	width: 20%;
+	height: 1.5rem;
+	border-width: 2px;
+	border-radius: 2rem;
+	background-color: rgba(132, 186, 253, 0.594);
+	position: relative;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+	justify-content: start;
+	transition: all 0.3s ease-in-out;
+}
+
+.toggle {
+	width: 1.2rem;
+	height: 1.2rem;
+	border-radius: 1rem;
+	margin: 0.25rem;
+	background-color: white;
+	transition: all 10s ease-in-out;
+}
+
+.status.active {
+	background-color: rgb(132, 187, 253);
+	justify-content: end;
+}
+
+.status::before {
+	position: absolute;
+	content: '°C';
+	left: -1.5rem;
+	font-weight: bold;
+}
+
+.status::after {
+	position: absolute;
+	content: '°F';
+	right: -1.5rem;
+	font-weight: bold;
+}
